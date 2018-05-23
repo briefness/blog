@@ -1,26 +1,28 @@
 <template>
   <div class="header">
     <span class="header-title">圈子</span>
-    <Menu mode="horizontal" active-name="1">
-        <MenuItem name="1">
+    <Menu mode="horizontal" :active-name="activeMenu === '//' ? '/blogList' : activeMenu" @on-select="selectMenu">
+        <MenuItem name="/blogList/">
             <Icon type="ios-paper"></Icon>
             首页
         </MenuItem>
-        <MenuItem name="2">
+        <!-- <MenuItem name="/">
             <Icon type="person"></Icon>
             关于我
-        </MenuItem>
+        </MenuItem> -->
     </Menu>
     <Input v-model="headerSearch" icon="ios-search-strong" placeholder="搜索" @on-click="searchInfo" @on-enter="searchInfo" class="header-search-input"></Input>
   </div>
 </template>
 
 <script>
+import utils_ from '@/tool/Utils'
 export default {
   name: 'Header',
   data () {
     return {
-      headerSearch: ''
+      headerSearch: '',
+      activeMenu: '/' + utils_.getRouteName(this.$route.path, 1) + '/' + utils_.getRouteName(this.$route.path, 2)
     }
   },
   mounted () {
@@ -28,6 +30,9 @@ export default {
   methods: {
     // 搜索(包括回车搜索和点击搜索图标搜索)
     searchInfo: function () {
+    },
+    selectMenu: function (name) {
+      this.$router.push(name)
     }
   }
 }
