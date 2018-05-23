@@ -36,7 +36,7 @@ export default {
     return {
       authorInfo: {
         avatar: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
-        name: '我的名字',
+        name: '我的名字'
       },
       meta: {
         publishTime: '2018.05.12 08:22',
