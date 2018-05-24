@@ -26,7 +26,7 @@ export default {
     // 只看作者
     justLookAuthor: function () {},
     // 按时间正序
-    timeSequence: function () {}
+    timeSequence: function () {},
     // 按时间倒序
     timeInverted: function () {}
   }
