@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 const Index = () => import(/* webpackChunkName: "Index" */ '@/components/Index')
-const BlogList = () => import(/* webpackChunkName: "Index" */ '@/components/view/BlogList')
-const BlogDetail = () => import(/* webpackChunkName: "Index" */ '@/components/view/BlogDetail')
+const BlogList = () => import(/* webpackChunkName: "Index" */ '@/components/view/blogList/BlogList')
+const BlogDetail = () => import(/* webpackChunkName: "Index" */ '@/components/view/blogDetail/BlogDetail')
 
 Vue.use(Router)
 

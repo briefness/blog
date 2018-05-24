@@ -9,6 +9,18 @@ function isString (obj) {
   return (typeof obj === 'string') && obj.constructor === String
 }
 /**
+ * 判断字符串是否为空
+ * @Author   Raychar
+ * @DateTime 2017-06-15
+ * @param    {object}   obj 判断对象
+ * @return   {Boolean}      判断结果 true: 空
+ */
+function stringIsNull (obj) {
+  if (isString(obj)) {
+    return (obj === null || obj === undefined || obj === '')
+  }
+}
+/**
  * 判断是否为整数
  * @Author   Raychar
  * @DateTime 2017-06-15
@@ -33,5 +45,6 @@ function getRouteName (fullRoute, level) {
 export default {
   isInteger,
   isString,
-  getRouteName
+  getRouteName,
+  stringIsNull
 }

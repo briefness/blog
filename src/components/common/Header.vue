@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <span class="header-title">圈子</span>
-    <Menu mode="horizontal" :active-name="activeMenu === '//' ? '/blogList' : activeMenu" @on-select="selectMenu">
+    <Menu mode="horizontal" :active-name="activeMenu === '//' ? '/blogList/' : activeMenu" @on-select="selectMenu">
         <MenuItem name="/blogList/">
             <Icon type="ios-paper"></Icon>
             首页
