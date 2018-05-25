@@ -1,5 +1,5 @@
 # blog
-一个简单的使用VUE仿简书
+使用VUE仿简书
 > mory
 
 ## Build Setup
