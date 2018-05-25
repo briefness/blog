@@ -10,6 +10,28 @@
         <a @click="timeInverted">按时间倒序</a>
       </div>
     </div>
+    <div class="comment">
+      <div class="author">
+        <div class="v-tooltip-container" style="z-index: 0;">
+          <Avatar class="avatar" :src="authorInfo.avatar" />
+        </div>
+        <div class="info">
+          <span class="name">{{authorInfo.userName}}</span>
+          <div class="meta">
+            <span>{{meta.floor}}楼 · {{meta.publishTime}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="comment-wrap">
+        <p>{{meta.comment}}</p>
+        <div class="tool-group">
+          <a id="like-button-23786715" :class="{'like-button' : isLike, 'like-button liked': !isLike}" @click="likeComment">
+            <span>{{meta.like}}人赞</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    </div>
   </div>
 </template>
 
@@ -18,7 +40,18 @@ export default {
   name: 'CommentList',
   data () {
     return {
-      commentCount: 63
+      isLike: true,
+      commentCount: 63,
+      authorInfo: {
+        avatar: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
+        userName: '用户名'
+      },
+      meta: {
+        floor: 17,
+        publishTime: '2018.05.10 19:25',
+        comment: '我是一名新晋医生，偶尔也会吐槽基层医生工资太低，同学刚毕业轻松翻我好几个倍，总建议让我换工作',
+        like: 63
+      }
     }
   },
   mounted () {},
@@ -28,7 +61,11 @@ export default {
     // 按时间正序
     timeSequence: function () {},
     // 按时间倒序
-    timeInverted: function () {}
+    timeInverted: function () {},
+    // 评论点赞
+    likeComment: function () {
+      this.isLike = !this.isLike
+    }
   }
 }
 </script>
@@ -37,6 +74,7 @@ export default {
 <style scoped>
 .comment-list .top-title {
   padding-bottom: 20px;
+  height: 50px;
   font-size: 17px;
   font-weight: 700;
   border-bottom: 1px solid #f0f0f0;
@@ -58,5 +96,87 @@ export default {
   font-weight: 400;
   color: #969696;
   display: inline-block;
+}
+/* 评论区 */
+.comment-list .comment {
+  padding: 20px 0 30px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.comment-list .comment .author {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.comment-list .comment .author .v-tooltip-container {
+  display: inline-block;
+  position: relative;
+}
+.comment-list .comment .author .v-tooltip-container .avatar {
+  margin-right: 5px;
+  width: 38px;
+  height: 38px;
+  vertical-align: middle;
+  display: inline-block;
+}
+.comment-list .comment .author .info {
+  display: inline-block;
+  vertical-align: middle;
+}
+.comment-list .comment .author .info .name {
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+  display: inline-block;
+  width: 100%;
+}
+.comment-list .comment .author .info .meta {
+  font-size: 12px;
+  color: #969696;
+}
+.comment-list .comment .author .info .meta span {
+  margin-right: 6px;
+}
+.comment-list .comment .comment-wrap p {
+  margin: 10px 0;
+  line-height: 1.5;
+  font-size: 16px;
+  word-break: break-word!important;
+}
+.comment-list .comment .tool-group {
+  text-align: left;
+}
+.comment-list .comment .tool-group a {
+  margin-right: 10px;
+  font-size: 0;
+  color: #969696;
+  display: inline-block;
+}
+.comment-list .comment .like-button {
+  position: relative;
+  padding-left: 23px;
+}
+.comment-list .comment .like-button span:hover {
+  color: #333;
+}
+.comment-list .comment .like-button span {
+  vertical-align: middle;
+  font-size: 14px;
+}
+.comment-list .comment .like-button:before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: -16px;
+  width: 50px;
+  height: 50px;
+  background-image: url(~assets/images/like.png);
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: 1050px 50px;
+}
+.comment-list .comment .like-button.liked:before {
+  background-position: right;
+}
+.comment-list .comment .like-button.liked {
+  color: #333;
 }
 </style>
