@@ -3,7 +3,7 @@
     <div class="blog-info">
       <p class="title">文章标题</p>
       <div class="author">
-        <img :src="authorInfo.avatar" />
+        <img v-lazy="authorInfo.avatar" />
         <div class="info">
           <span class="name">{{authorInfo.name}}</span>
           <Button type="primary" shape="circle" size="small">

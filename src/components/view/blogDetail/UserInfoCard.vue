@@ -1,7 +1,7 @@
 <template>
   <div class="user-info-card">
     <router-link to="/blogDetail" class="banner">
-      <img :src="userInfo.avatar" />
+      <img v-lazy="userInfo.avatar" />
     </router-link>
     <div class="info">
       <router-link to="/blogDetail" class="name">

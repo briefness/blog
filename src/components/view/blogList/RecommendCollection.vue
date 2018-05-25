@@ -1,7 +1,7 @@
 <template>
   <div class="recommend-collection">
     <a class="collection" v-for="(collection, index) in recommendCollectionInfo" :key="index">
-      <img :src="collection.collectionImg">
+      <img v-lazy="collection.collectionImg">
       <div class="collection-name">{{collection.collectionName}}</div>
     </a>
   </div>

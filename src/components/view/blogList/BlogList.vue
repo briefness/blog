@@ -19,7 +19,7 @@
         </p>
       </div>
       <router-link to="/blogDetail">
-        <img :src="articleInfo.relatedImg" class="img-blur-done" />
+        <img v-lazy="articleInfo.relatedImg" class="img-blur-done" />
       </router-link>
     </div>
     <Button type="primary" long @click="loadMore">阅读更多</Button>
