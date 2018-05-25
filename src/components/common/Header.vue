@@ -12,6 +12,9 @@
         </MenuItem> -->
     </Menu>
     <Input v-model="headerSearch" icon="ios-search-strong" placeholder="搜索" @on-click="searchInfo" @on-enter="searchInfo" class="header-search-input"></Input>
+    <router-link to="/noteBooks" class="write-note">
+      写文章
+    </router-link>
   </div>
 </template>
 
@@ -68,10 +71,23 @@ export default {
 }
 .header .header-search-input {
   position: absolute;
-  right: 200px;
+  right: 40%;
   top: 14px;
   width: 200px;
   z-index: 9;
+}
+.header .write-note {
+  position: absolute;
+  right: 200px;
+  z-index: 9;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
+  margin: 10px 15px 0;
+  border-radius: 20px;
+  font-size: 15px;
+  color: #fff;
+  background-color: #ea6f5a;
 }
 .header .ivu-menu-light {
   position: absolute;
