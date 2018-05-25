@@ -1,6 +1,6 @@
 <template>
   <div class="write-note">
-    <mavon-editor v-model="note"/>
+    <mavon-editor v-model="note" @save="saveNote"/>
   </div>
 </template>
 
@@ -13,7 +13,12 @@ export default {
     }
   },
   mounted () {},
-  methods: {}
+  methods: {
+    // 保存方法
+    saveNote: function () {
+      console.log(this.note)
+    }
+  }
 }
 </script>
 
