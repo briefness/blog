@@ -12,6 +12,12 @@
         </MenuItem> -->
     </Menu>
     <Input v-model="headerSearch" icon="ios-search-strong" placeholder="搜索" @on-click="searchInfo" @on-enter="searchInfo" class="header-search-input"></Input>
+    <div class="">
+      <router-link to="/login">
+        <Button type="text" class="login-btn">登陆</Button>
+      </router-link>
+      <Button type="primary" shape="circle" size="large" class="register-btn">注册</Button>
+    </div>
     <router-link to="/noteBooks" class="write-note">
       写文章
     </router-link>
@@ -46,6 +52,27 @@ export default {
 .header {
   height: 60px;
   position: relative;
+}
+.header .login-btn {
+  position: absolute;
+  right: 420px;
+  top: 13px;
+  color: #969696;
+  z-index: 9;
+  font-size: 15px;
+}
+.header .register-btn {
+  position: absolute;
+  right: 330px;
+  top: 13px;
+  width: 80px;
+  height: 38px;
+  border: 1px solid rgba(236,97,73,.7);
+  border-radius: 20px;
+  background-color: #FFF;
+  color: #ea6f5a;
+  z-index: 9;
+  font-size: 15px;
 }
 .header .ivu-menu-horizontal.ivu-menu-light:after {
   content: '';
