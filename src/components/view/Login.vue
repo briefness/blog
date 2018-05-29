@@ -6,25 +6,47 @@
     <div class="main">
       <h4 class="title">
         <div class="normal-title">
-          <a class="active" href="/sign_in">登录</a>
+          <a :class="{active: isActive}" @click="triggerLogin">登录</a>
           <b>·</b>
-          <a href="/sign_up">注册</a>
+          <a :class="{active: !isActive}" @click="triggerRegister">注册</a>
         </div>
       </h4>
-      <div class="login-form">
+      <div class="login-form" v-if="isActive">
         <Form ref="userInfo" :model="userInfo" :rules="ruleValidate">
            <FormItem prop="userName">
-               <Input type="password" v-model="userInfo.userName">
+               <Input type="text" size="large" placeholder="手机号或邮箱" v-model="userInfo.userName">
                  <Icon type="ios-person-outline" slot="prepend"></Icon>
                </Input>
            </FormItem>
             <FormItem prop="passwd">
-                <Input type="password" v-model="userInfo.passwd">
+                <Input type="password" size="large" placeholder="密码" v-model="userInfo.passwd">
                   <Icon type="ios-locked-outline" slot="prepend"></Icon>
                 </Input>
             </FormItem>
            <FormItem>
-               <Button type="primary" @click="handleSubmit('userInfo')">登陆</Button>
+               <Button type="primary" @click="handleLoginSubmit('userInfo')">登陆</Button>
+           </FormItem>
+        </Form>
+      </div>
+      <div class="register-form" v-if="!isActive">
+        <Form ref="registerInfo" :model="registerInfo" :rules="registerRuleValidate">
+           <FormItem prop="nickname">
+               <Input type="text" size="large" placeholder="你的昵称" v-model="registerInfo.nickname">
+                 <Icon type="ios-person-outline" slot="prepend"></Icon>
+               </Input>
+           </FormItem>
+            <FormItem prop="mobile">
+                <Input type="text" size="large" placeholder="手机号" v-model="registerInfo.mobile">
+                  <Icon type="iphone" slot="prepend"></Icon>
+                </Input>
+            </FormItem>
+            <FormItem prop="regPasswd">
+                <Input type="password" size="large" placeholder="设置密码" v-model="registerInfo.regPasswd">
+                  <Icon type="ios-locked-outline" slot="prepend"></Icon>
+                </Input>
+            </FormItem>
+           <FormItem>
+               <Button type="primary" @click="handleRegisterSubmit('registerInfo')">注册</Button>
            </FormItem>
         </Form>
       </div>
@@ -33,36 +55,68 @@
 </template>
 
 <script>
-const validatePass = (rule, value, callback) => {
+const validateMobile = (rule, value, callback) => {
+  let mobileReg = /^1[3|4|5|7|8][0-9]{9}$/
   if (value === '') {
-    callback(new Error('Please enter your password'));
-  }
-}
-const validateName = (rule, value, callback) => {
-  if (value === '') {
-    callback(new Error('Please enter your userName'));
+    callback(new Error('请填写手机号'))
+  } else if (!mobileReg.test(value)) {
+    callback(new Error('手机号不符合规则'))
+  } else {
+    callback()
   }
 }
 export default {
   name: 'Login',
   data () {
     return {
+      isActive: true,
       userInfo: {
         passwd: '',
         username: ''
       },
+      registerInfo: {
+        regPasswd: '',
+        mobile: '',
+        nickname: ''
+      },
       ruleValidate: {
         passwd: [
-          { validator: validatePass, trigger: 'blur' }
+          {required: true, message: '请填写密码', trigger: 'blur'},
+          {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
         ],
         userName: [
-          { validator: validateName, trigger: 'blur' }
+          { required: true, message: '请填写手机号或邮箱', trigger: 'blur' }
+        ]
+      },
+      registerRuleValidate: {
+        nickname: [
+          { required: true, message: '请填写昵称', trigger: 'blur' }
+        ],
+        mobile: [
+          { required: true, validator: validateMobile, trigger: 'blur' }
+        ],
+        regPasswd: [
+          {required: true, message: '请填写密码', trigger: 'blur'},
+          {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
         ]
       }
     }
   },
   mounted () {},
-  methods: {}
+  methods: {
+    // login
+    handleLoginSubmit: function () {},
+    // register
+    handleRegisterSubmit: function () {},
+    triggerRegister: function () {
+      this.isActive = false
+      this.$refs['userInfo'].resetFields()
+    },
+    triggerLogin: function () {
+      this.isActive = true
+      this.$refs['registerInfo'].resetFields()
+    }
+  }
 }
 </script>
 
@@ -104,10 +158,28 @@ export default {
 }
 .login .main .title a {
   padding: 10px;
+  color: #969696;
 }
-.login .main .active {
+.login .main .title a:hover {
+  border-bottom: 2px solid #ea6f5a;
+}
+.login .main .title a.active {
   font-weight: 700;
   color: #ea6f5a;
   border-bottom: 2px solid #ea6f5a;
 }
+/* 表单 */
+.login-form .ivu-input-group {
+  font-size: 20px;
+}
+.login .ivu-btn.ivu-btn-primary {
+  width: 100%;
+  font-size: 18px;
+  border-radius: 25px;
+  margin-top: 20px;
+}
+.login .register-form .ivu-btn.ivu-btn-primary {
+   background-color: #42c02e;
+   border-color: #42c02e;
+ }
 </style>
