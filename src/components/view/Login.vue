@@ -3,6 +3,7 @@
     <div class="logo">
       圈子
     </div>
+    <p class="subheading">找到属于你的圈子</p>
     <div class="main">
       <h4 class="title">
         <div class="normal-title">
@@ -102,17 +103,21 @@ export default {
       }
     }
   },
-  mounted () {},
+  mounted () {
+    this.isActive = this.$route.params.isLogin
+  },
   methods: {
     // login
-    handleLoginSubmit: function () {},
+    handleLoginSubmit () {
+      this.$router.push('/blogList')
+    },
     // register
-    handleRegisterSubmit: function () {},
-    triggerRegister: function () {
+    handleRegisterSubmit () {},
+    triggerRegister () {
       this.isActive = false
       this.$refs['userInfo'].resetFields()
     },
-    triggerLogin: function () {
+    triggerLogin () {
       this.isActive = true
       this.$refs['registerInfo'].resetFields()
     }
@@ -121,7 +126,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
+@import '~assets/less/common.less';
 .login {
   height: 100%;
   min-height: 750px;
@@ -136,7 +142,16 @@ export default {
   position: absolute;
   top: 56px;
   left: 50px;
-  color: #ea6f5a;
+  color: @main_color;
+  cursor: pointer;
+}
+.login .subheading {
+  width: 10px;
+  font-size: 30px;
+  position: absolute;
+  top: 130px;
+  left: 72px;
+  color: @main_color;
   cursor: pointer;
 }
 .login .main {
@@ -161,12 +176,12 @@ export default {
   color: #969696;
 }
 .login .main .title a:hover {
-  border-bottom: 2px solid #ea6f5a;
+  border-bottom: 2px solid @main_color;
 }
 .login .main .title a.active {
   font-weight: 700;
-  color: #ea6f5a;
-  border-bottom: 2px solid #ea6f5a;
+  color: @main_color;
+  border-bottom: 2px solid @main_color;
 }
 /* 表单 */
 .login-form .ivu-input-group {

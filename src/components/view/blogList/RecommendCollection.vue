@@ -15,15 +15,15 @@ export default {
       recommendCollectionInfo: [
         {
           collectionImg: '//upload.jianshu.io/collections/images/83/1.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64',
-          collectionName: '摄影'
+          collectionName: '摄影圈'
         },
         {
           collectionImg: '//upload.jianshu.io/collections/images/4/sy_20091020135145113016.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64',
-          collectionName: '读书'
+          collectionName: '读书圈'
         },
         {
           collectionImg: '//upload.jianshu.io/collections/images/14/6249340_194140034135_2.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/64/h/64',
-          collectionName: '@IT-互联网'
+          collectionName: 'IT圈'
         }
       ]
     }

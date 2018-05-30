@@ -27,11 +27,11 @@ export default {
   mounted () {},
   methods: {
     // textarea获取焦点事件
-    getFocusSwitchShowAction: function () {
+    getFocusSwitchShowAction () {
       this.showAction = true
     },
     // 发送评论
-    sendComment: function () {
+    sendComment () {
       if (utils_.stringIsNull(this.commentInfo.comment)) {
         this.$Message.warning('回复内容不能为空')
       } else {
@@ -39,7 +39,7 @@ export default {
       }
     },
     // 取消评论
-    cancelComment: function () {
+    cancelComment () {
       this.showAction = false
     }
   }

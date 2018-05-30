@@ -25,7 +25,9 @@
       <div class="comment-wrap">
         <p>{{meta.comment}}</p>
         <div class="tool-group">
-          <a id="like-button-23786715" :class="{'like-button' : isLike, 'like-button liked': !isLike}" @click="likeComment">
+          <a :class="{'like-button' : isLike, 'like-button liked': !isLike}" @click="likeComment">
+            <Icon type="ios-lightbulb-outline" v-if="isLike" class="afflatus"></Icon>
+            <Icon type="ios-lightbulb" v-if="!isLike" class="afflatus my-afflatus"></Icon>
             <span>{{meta.like}}人赞</span>
           </a>
         </div>
@@ -57,13 +59,13 @@ export default {
   mounted () {},
   methods: {
     // 只看作者
-    justLookAuthor: function () {},
+    justLookAuthor () {},
     // 按时间正序
-    timeSequence: function () {},
+    timeSequence () {},
     // 按时间倒序
-    timeInverted: function () {},
+    timeInverted () {},
     // 评论点赞
-    likeComment: function () {
+    likeComment () {
       this.isLike = !this.isLike
     }
   }
@@ -71,7 +73,8 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
+@import '~assets/less/common.less';
 .comment-list .top-title {
   padding-bottom: 20px;
   height: 50px;
@@ -161,20 +164,15 @@ export default {
   vertical-align: middle;
   font-size: 14px;
 }
-.comment-list .comment .like-button:before {
-  content: '';
+.comment-list .comment .like-button .afflatus {
   position: absolute;
-  left: -16px;
-  top: -16px;
-  width: 50px;
-  height: 50px;
-  background-image: url(~assets/images/like.png);
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: 1050px 50px;
+  left: 3px;
+  top: 0px;
+  font-size: 20px;
+  color: #969696;
 }
-.comment-list .comment .like-button.liked:before {
-  background-position: right;
+.comment-list .comment .like-button .afflatus.my-afflatus {
+  color: @main_color;
 }
 .comment-list .comment .like-button.liked {
   color: #333;

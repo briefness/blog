@@ -15,7 +15,7 @@ export default {
   mounted () {},
   methods: {
     // 保存方法
-    saveNote: function () {
+    saveNote () {
       console.log(this.note)
     }
   }

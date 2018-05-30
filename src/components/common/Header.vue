@@ -13,10 +13,8 @@
     </Menu>
     <Input v-model="headerSearch" icon="ios-search-strong" placeholder="搜索" @on-click="searchInfo" @on-enter="searchInfo" class="header-search-input"></Input>
     <div class="">
-      <router-link to="/login">
-        <Button type="text" class="login-btn">登陆</Button>
-      </router-link>
-      <Button type="primary" shape="circle" size="large" class="register-btn">注册</Button>
+      <Button type="text" class="login-btn" @click="toLogin">登陆</Button>
+      <Button type="primary" shape="circle" size="large" class="register-btn" @click="toRegister">注册</Button>
     </div>
     <router-link to="/noteBooks" class="write-note">
       写文章
@@ -38,17 +36,26 @@ export default {
   },
   methods: {
     // 搜索(包括回车搜索和点击搜索图标搜索)
-    searchInfo: function () {
+    searchInfo () {
     },
-    selectMenu: function (name) {
+    selectMenu (name) {
       this.$router.push(name)
+    },
+    // 跳转到登陆
+    toLogin () {
+      this.$router.push({'name': 'Login', 'params': {'isLogin': true}})
+    },
+    // 跳转到注册
+    toRegister () {
+      this.$router.push({'name': 'Login', 'params': {'isLogin': false}})
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
+@import '~assets/less/common.less';
 .header {
   height: 60px;
   position: relative;
@@ -67,10 +74,10 @@ export default {
   top: 13px;
   width: 80px;
   height: 38px;
-  border: 1px solid rgba(236,97,73,.7);
+  border: 1px solid @main_color;
   border-radius: 20px;
   background-color: #FFF;
-  color: #ea6f5a;
+  color: @main_color;
   z-index: 9;
   font-size: 15px;
 }
@@ -114,7 +121,7 @@ export default {
   border-radius: 20px;
   font-size: 15px;
   color: #fff;
-  background-color: #ea6f5a;
+  background-color: @main_color;
 }
 .header .ivu-menu-light {
   position: absolute;

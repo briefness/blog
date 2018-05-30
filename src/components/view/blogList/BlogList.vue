@@ -58,7 +58,7 @@ export default {
   mounted () {},
   methods: {
     // 阅读更多
-    loadMore: function () {}
+    loadMore () {}
   }
 }
 </script>

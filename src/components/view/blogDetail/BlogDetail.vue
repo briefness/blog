@@ -30,6 +30,8 @@
     <div class="meta-bottom">
       <div :class="{'like' : isLike, 'like liked': !isLike}">
         <div class="btn-like" @click="likeThisArticle">
+          <Icon v-if="isLike" type="ios-heart-outline" class="heart"></Icon>
+          <Icon v-if="!isLike" type="ios-heart"  class="my-heart"></Icon>
           <a>喜欢</a>
         </div>
         <div class="modal-wrap">
@@ -75,9 +77,9 @@ export default {
   mounted () {},
   methods: {
     // 支持作者
-    supportAuthor: function () {},
+    supportAuthor () {},
     // 喜欢这篇文章
-    likeThisArticle: function () {
+    likeThisArticle () {
       this.isLike = !this.isLike
     }
   }
@@ -85,7 +87,9 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
+@import '~assets/less/common.less';
+
 .blog-detail-info {
   margin: 0 auto;
   width: 40%;
@@ -145,9 +149,9 @@ export default {
   margin-bottom: 20px;
   padding: 8px 25px;
   font-size: 16px;
-  background-color: #ea6f5a;
+  background-color: @main_color;
   border-radius: 20px;
-  border-color: #ea6f5a;
+  border-color: @main_color;
 }
 
 /* 喜欢按钮 */
@@ -159,7 +163,7 @@ export default {
   position: relative;
   padding: 13px 0 15px 0;
   font-size: 0;
-  border: 1px solid #EA6F5A;
+  border: 1px solid @main_color;
   border-radius: 40px;
   width: 185px;
   height: 57px;
@@ -169,8 +173,8 @@ export default {
   position: relative;
   padding: 13px 0 15px 0;
   font-size: 0;
-  background-color: #EA6F5A;
-  border: 1px solid #EA6F5A;
+  background-color: @main_color;
+  border: 1px solid @main_color;
   border-radius: 40px;
   width: 185px;
   height: 57px;
@@ -183,29 +187,32 @@ export default {
   display: inline-block;
   font-size: 19px;
 }
-.blog-detail-info .meta-bottom .like .btn-like:before {
-  content: '';
+.blog-detail-info .meta-bottom .like .btn-like .heart {
   position: absolute;
-  left: 12px;
-  top: 2px;
-  width: 50px;
-  height: 50px;
-  background-image: url(~assets/images/like_animation_steps-62a00a7b52377d3069927cdb8e61fd34.png);
-  background-position: left;
-  background-repeat: no-repeat;
-  background-size: 1000px 50px;
+  left: 17px;
+  top: 13px;
+  color: @main_color;
+  font-size: 30px;
 }
+.blog-detail-info .meta-bottom .like .btn-like .my-heart {
+  position: absolute;
+  left: 17px;
+  top: 13px;
+  color: #FFF;
+  font-size: 30px;
+}
+
 .blog-detail-info .meta-bottom .like.liked .btn-like:before {
   background-position: right;
 }
 .blog-detail-info .meta-bottom .like .btn-like a {
   position: relative;
   padding: 18px 30px 18px 54px;
-  color: #EA6F5A;
+  color: @main_color;
 }
 .blog-detail-info .meta-bottom .like .modal-wrap {
   font-size: 18px;
-  border-left: 1px solid rgba(236, 97, 73, 0.4);
+  border-left: 1px solid @main_color;
   display: inline-block;
   margin-left: -15px;
 }
@@ -213,7 +220,7 @@ export default {
   border-left: 1px solid #FFF;
 }
 .blog-detail-info .meta-bottom .like .modal-wrap a {
-  color: #EA6F5A;
+  color: @main_color;
   padding: 18px 26px 18px 18px;
 }
 </style>
