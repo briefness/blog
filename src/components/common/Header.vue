@@ -12,9 +12,29 @@
         </MenuItem> -->
     </Menu>
     <Input v-model="headerSearch" icon="ios-search-strong" placeholder="搜索" @on-click="searchInfo" @on-enter="searchInfo" class="header-search-input"></Input>
-    <div class="">
-      <Button type="text" class="login-btn" @click="toLogin">登陆</Button>
-      <Button type="primary" shape="circle" size="large" class="register-btn" @click="toRegister">注册</Button>
+    <div v-if="isLogin">
+      <Button type="text" class="login-btn action" @click="toLogin">登录</Button>
+      <Button type="text" class="register-btn action" @click="toRegister">注册</Button>
+    </div>
+    <div v-if="!isLogin" class="user-information">
+      <Badge dot :count="informationCount">
+        <Icon type="ios-bell"></Icon>
+      </Badge>
+    </div>
+    <div v-if="!isLogin" class="login-info">
+      <Dropdown trigger="click" @on-click="selectUserInfoAction">
+        <a href="javascript:void(0)">
+          <Avatar :src="avatar" />
+        </a>
+        <DropdownMenu slot="list">
+          <DropdownItem name="myCircle">
+            <Icon type="ios-person"></Icon> <span>我的圈子</span>
+          </DropdownItem>
+          <DropdownItem name="Login">
+            <Icon type="android-exit"></Icon> <span>退出</span>
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
     </div>
     <router-link to="/noteBooks" class="write-note">
       写文章
@@ -28,6 +48,9 @@ export default {
   name: 'Header',
   data () {
     return {
+      informationCount: 1,
+      avatar: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
+      isLogin: false,
       headerSearch: '',
       activeMenu: '/' + utils_.getRouteName(this.$route.path, 1) + '/' + utils_.getRouteName(this.$route.path, 2)
     }
@@ -48,6 +71,12 @@ export default {
     // 跳转到注册
     toRegister () {
       this.$router.push({'name': 'Login', 'params': {'isLogin': false}})
+    },
+    selectUserInfoAction (name) {
+      // 判断是否是退出
+      if (name === 'Login') {
+        this.$router.push({'name': name, 'params': {'isLogin': true}})
+      }
     }
   }
 }
@@ -60,26 +89,49 @@ export default {
   height: 60px;
   position: relative;
 }
-.header .login-btn {
+.header .login-info {
   position: absolute;
+  top: 13px;
+  right: 350px;
+  z-index: 9;
+}
+.header .user-information {
+  position: absolute;
+  top: 13px;
   right: 420px;
+  font-size: 24px;
+  z-index: 9;
+  cursor: pointer;
+}
+.header .ivu-dropdown .ivu-dropdown-item {
+  text-align: left;
+}
+.header .ivu-dropdown .ivu-dropdown-item span {
+  display: inline-block;
+  line-height: 20px;
+  vertical-align: top;
+}
+.header .ivu-dropdown .ivu-dropdown-item .ivu-icon {
+  font-size: @icon_size;
+  vertical-align: top;
+  color: @main_color;
+}
+.header .action {
+  position: absolute;
   top: 13px;
   color: #969696;
   z-index: 9;
   font-size: 15px;
 }
-.header .register-btn {
-  position: absolute;
-  right: 330px;
-  top: 13px;
-  width: 80px;
-  height: 38px;
-  border: 1px solid @main_color;
-  border-radius: 20px;
-  background-color: #FFF;
+.header .action:hover {
   color: @main_color;
-  z-index: 9;
-  font-size: 15px;
+}
+.header .login-btn {
+  right: 390px;
+  border-right: 2px solid #CCC;
+}
+.header .register-btn {
+  right: 330px;
 }
 .header .ivu-menu-horizontal.ivu-menu-light:after {
   content: '';

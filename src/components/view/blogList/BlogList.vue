@@ -22,7 +22,7 @@
         <img v-lazy="blog.relatedImg" class="img-blur-done" />
       </router-link>
     </div>
-    <Button type="primary" long @click="loadMore" v-if="!loading">阅读更多</Button>
+    <Button type="primary" long @click="loadMore" v-if="!loading">更多圈子</Button>
     <div class="load-more-loading" v-if="loading">
       <Spin fix>
         <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
@@ -84,10 +84,10 @@ export default {
     // 阅读更多
     loadMore () {
       this.loading = true
-      // let loadingAction = setInterval(() => {
-      //   this.loading = false
-      //   clearInterval(loadingAction)
-      // }, 3000)
+      let loadingAction = setInterval(() => {
+        this.loading = false
+        clearInterval(loadingAction)
+      }, 3000)
     }
   }
 }
