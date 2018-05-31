@@ -1,28 +1,34 @@
 <template>
   <div class="blog-content-info">
     <RecommendCollection></RecommendCollection>
-    <div class="blog-list">
+    <div class="blog-list" v-for="(blog, index) in blogList" :key="index">
       <div class="blog-list-content">
         <p class="author">
-          <Avatar class="avatar" :src="authorInfo.avatar" />
-          <span>{{authorInfo.userName}}</span>
-          <span class="publish-time">{{articleInfo.publishTime}}</span>
+          <Avatar class="avatar" :src="blog.avatar" />
+          <span>{{blog.userName}}</span>
+          <span class="publish-time">{{blog.publishTime}}</span>
         </p>
-        <router-link to="/blogDetail" class="blog-title">{{articleInfo.blogTitle}}</router-link>
+        <router-link to="/blogDetail" class="blog-title">{{blog.blogTitle}}</router-link>
         <p class="blog-content">
-          {{articleInfo.blogContent}}
+          {{blog.blogContent}}
         </p>
         <p class="meta">
-          <router-link to="/blogDetail"><Icon type="eye"></Icon>{{actionInfo.pageView}}</router-link>
-          <router-link to="/blogDetail"><Icon type="chatbox"></Icon>{{actionInfo.reply}}</router-link>
-          <Icon type="heart"></Icon>{{actionInfo.like}}
+          <router-link to="/blogDetail"><Icon type="eye"></Icon>{{blog.pageView}}</router-link>
+          <router-link to="/blogDetail"><Icon type="chatbox"></Icon>{{blog.reply}}</router-link>
+          <Icon type="heart"></Icon>{{blog.like}}
         </p>
       </div>
       <router-link to="/blogDetail">
-        <img v-lazy="articleInfo.relatedImg" class="img-blur-done" />
+        <img v-lazy="blog.relatedImg" class="img-blur-done" />
       </router-link>
     </div>
-    <Button type="primary" long @click="loadMore">阅读更多</Button>
+    <Button type="primary" long @click="loadMore" v-if="!loading">阅读更多</Button>
+    <div class="load-more-loading" v-if="loading">
+      <Spin fix>
+        <Icon type="load-c" size=18 class="demo-spin-icon-load"></Icon>
+        <div>一路小跑...</div>
+      </Spin>
+    </div>
   </div>
 </template>
 
@@ -35,36 +41,61 @@ export default {
   },
   data () {
     return {
-      // 用戶信息
-      authorInfo: {
-        avatar: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
-        userName: '用户名'
-      },
-      // 文章信息
-      articleInfo: {
-        publishTime: '05.08 08:45',
-        blogTitle: '文章标题',
-        blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
-        relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240'
-      },
-      // 数据信息
-      actionInfo: {
-        pageView: 1000,
-        reply: 10000,
-        like: 10
-      }
+      loading: false,
+      blogList: [
+        {
+          avatar: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
+          userName: '用户名',
+          publishTime: '05.08 08:45',
+          blogTitle: '文章标题',
+          blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240',
+          pageView: 1000,
+          reply: 10000,
+          like: 10
+        },
+        {
+          avatar: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
+          userName: '用户名',
+          publishTime: '05.08 08:45',
+          blogTitle: '文章标题',
+          blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240',
+          pageView: 1000,
+          reply: 10000,
+          like: 10
+        },
+        {
+          avatar: 'https://i.loli.net/2017/08/21/599a521472424.jpg',
+          userName: '用户名',
+          publishTime: '05.08 08:45',
+          blogTitle: '文章标题',
+          blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240',
+          pageView: 1000,
+          reply: 10000,
+          like: 10
+        }
+      ]
     }
   },
   mounted () {},
   methods: {
     // 阅读更多
-    loadMore () {}
+    loadMore () {
+      this.loading = true
+      // let loadingAction = setInterval(() => {
+      //   this.loading = false
+      //   clearInterval(loadingAction)
+      // }, 3000)
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="less" scoped>
+@import '~assets/less/common.less';
 .blog-content-info {
   margin-left: 25%;
   width: 40%;
@@ -78,6 +109,17 @@ export default {
   font-size: 15px;
   padding: 10px 15px;
 }
+/* 内容加载中 */
+.blog-content-info .load-more-loading {
+  position: relative;
+  height: 40px;
+  margin: 30px auto 60px;
+}
+.demo-spin-icon-load{
+  animation: ani-demo-spin 1s linear infinite;
+  color: @main_color;
+}
+
 .blog-list {
   position: relative;
 }
@@ -116,9 +158,8 @@ export default {
 .blog-list-content {
   padding-right: 160px;
   min-height: 140px;
-  margin-bottom: 17px;
+  padding-top: 17px;
   padding-bottom: 17px;
-  border-bottom: 1px solid #F0F0F0;
 }
 .blog-list .blog-title {
   color: #333;

@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    my footer
+    找到属于自己的圈子
   </div>
 </template>
 
@@ -21,5 +21,6 @@ export default {
   line-height: 50px;
   width: 100%;
   background-color: #FFF;
+  border-top: 1px solid #F0F0F0;
 }
 </style>

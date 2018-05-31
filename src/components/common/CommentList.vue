@@ -18,7 +18,7 @@
         <div class="info">
           <span class="name">{{authorInfo.userName}}</span>
           <div class="meta">
-            <span>{{meta.floor}}楼 · {{meta.publishTime}}</span>
+            <span>{{meta.publishTime}}</span>
           </div>
         </div>
       </div>

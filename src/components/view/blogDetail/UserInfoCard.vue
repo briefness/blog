@@ -14,7 +14,7 @@
         <span>{{meta.pageview}}万阅读 ·</span>
         <span>{{meta.attentionCount}}人关注</span>
       </div>
-      <Button type="primary" shape="circle" icon="android-add">关注</Button>
+      <Button type="primary" shape="circle" icon="android-add">加入圈子</Button>
     </div>
   </div>
 </template>

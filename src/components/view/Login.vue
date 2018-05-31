@@ -61,7 +61,7 @@ const validateMobile = (rule, value, callback) => {
   if (value === '') {
     callback(new Error('请填写手机号'))
   } else if (!mobileReg.test(value)) {
-    callback(new Error('手机号不符合规则'))
+    callback(new Error('手机号错误'))
   } else {
     callback()
   }

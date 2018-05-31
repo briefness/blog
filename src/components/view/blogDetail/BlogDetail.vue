@@ -8,7 +8,7 @@
           <span class="name">{{authorInfo.name}}</span>
           <Button type="primary" shape="circle" size="small">
             <Icon type="android-add"></Icon>
-            关注
+            加入圈子
           </Button>
           <div class="meta">
             <span>{{meta.publishTime}}</span>
@@ -24,7 +24,7 @@
     </div>
     <div class="support-author">
       <p>你来，已是清风拂面</p>
-      <Button type="primary" @click="supportAuthor">赞赏支持</Button>
+      <!-- <Button type="primary" @click="supportAuthor">赞赏支持</Button> -->
     </div>
     <UserInfoCard></UserInfoCard>
     <div class="meta-bottom">
@@ -77,7 +77,7 @@ export default {
   mounted () {},
   methods: {
     // 支持作者
-    supportAuthor () {},
+    // supportAuthor () {},
     // 喜欢这篇文章
     likeThisArticle () {
       this.isLike = !this.isLike
