@@ -146,10 +146,13 @@ export default {
 }
 .blog-content {
   display: -webkit-box;
-  -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  /*! autoprefixer: off */
+  -webkit-box-orient: vertical;
+  /* autoprefixer: on */
   overflow: hidden;
-  line-height: 24px;
+  text-overflow: ellipsis;
+  line-height: 1.6;
   margin-bottom: 8px;
 }
 .blog-list-content:first-child {
