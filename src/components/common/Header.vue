@@ -12,22 +12,22 @@
         </MenuItem> -->
     </Menu>
     <Input v-model="headerSearch" icon="ios-search-strong" placeholder="搜索" @on-click="searchInfo" @on-enter="searchInfo" class="header-search-input"></Input>
-    <div v-if="isLogin">
+    <div v-if="!isLogin">
       <Button type="text" class="login-btn action" @click="toLogin">登录</Button>
       <Button type="text" class="register-btn action" @click="toRegister">注册</Button>
     </div>
-    <div v-if="!isLogin" class="user-information">
+    <div v-if="isLogin" class="user-information">
       <Badge dot :count="informationCount">
         <Icon type="ios-bell"></Icon>
       </Badge>
     </div>
-    <div v-if="!isLogin" class="login-info">
+    <div v-if="isLogin" class="login-info">
       <Dropdown trigger="click" @on-click="selectUserInfoAction">
         <a href="javascript:void(0)">
           <Avatar :src="avatar" />
         </a>
         <DropdownMenu slot="list">
-          <DropdownItem name="myCircle">
+          <DropdownItem name="HomePage">
             <Icon type="ios-person"></Icon> <span>我的圈子</span>
           </DropdownItem>
           <DropdownItem name="Login">
@@ -56,6 +56,11 @@ export default {
     }
   },
   mounted () {
+    if (window.sessionStorage.getItem('token')) {
+      this.isLogin = true
+    } else {
+      this.$router.push({'name': 'Login', 'params': {'isLogin': true}})
+    }
   },
   methods: {
     // 搜索(包括回车搜索和点击搜索图标搜索)
@@ -75,7 +80,10 @@ export default {
     selectUserInfoAction (name) {
       // 判断是否是退出
       if (name === 'Login') {
+        window.sessionStorage.clear()
         this.$router.push({'name': name, 'params': {'isLogin': true}})
+      } else if (name === 'HomePage') {
+        this.$router.push({'name': name})
       }
     }
   }

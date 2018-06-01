@@ -109,6 +109,7 @@ export default {
   methods: {
     // login
     handleLoginSubmit () {
+      window.sessionStorage.setItem('token', 'tokens')
       this.$router.push('/blogList')
     },
     // register
