@@ -145,20 +145,13 @@ export default {
   height: 120px;
 }
 .blog-content-info .blog-content {
-  position:relative;
-  line-height:1.4em;
+  position: relative;
+  line-height: 1.4em;
   /* 3 times the line-height to show 3 lines */
-  height:4.2em;
-  overflow:hidden;
+  height: 4.2em;
+  overflow: hidden;
   margin-bottom: 8px;
 }
-// .blog-content:after {
-//   content: "...";
-//   font-weight: 800;
-//   position: absolute;
-//   bottom: 0;
-//   right: 0;
-// }
 .blog-content-info .blog-list-content:first-child {
   border-top: 1px solid #F0F0F0;
 }

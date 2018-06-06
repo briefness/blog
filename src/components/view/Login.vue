@@ -104,7 +104,9 @@ export default {
     }
   },
   mounted () {
-    this.isActive = this.$route.params.isLogin
+    if (this.$route.params.isLogin) {
+      this.isActive = this.$route.params.isLogin
+    }
   },
   methods: {
     // login
@@ -113,7 +115,12 @@ export default {
       this.$router.push('/blogList')
     },
     // register
-    handleRegisterSubmit () {},
+    handleRegisterSubmit () {
+      this.$Message.warning({
+        content: '暂不提供注册功能',
+        duration: 5
+      })
+    },
     triggerRegister () {
       this.isActive = false
       this.$refs['userInfo'].resetFields()
