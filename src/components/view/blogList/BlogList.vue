@@ -2,7 +2,7 @@
   <div class="blog-content-info">
     <RecommendCollection></RecommendCollection>
     <div class="blog-list" v-for="(blog, index) in blogList" :key="index">
-      <div class="blog-list-content">
+      <div class="blog-list-content" :class="{ hasImg: blog.relatedImg , noImg: !blog.relatedImg }">
         <p class="author">
           <Avatar class="avatar" :src="blog.avatar" />
           <span>{{blog.userName}}</span>
@@ -18,7 +18,7 @@
           <Icon type="heart"></Icon>{{blog.like}}
         </p>
       </div>
-      <router-link to="/blogDetail">
+      <router-link to="/blogDetail" v-if="blog.relatedImg">
         <img v-lazy="blog.relatedImg" class="img-blur-done" />
       </router-link>
     </div>
@@ -48,7 +48,7 @@ export default {
           userName: '用户名',
           publishTime: '05.08 08:45',
           blogTitle: '文章标题',
-          blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          blogContent: '限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
           relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240',
           pageView: 1000,
           reply: 10000,
@@ -59,7 +59,7 @@ export default {
           userName: '用户名',
           publishTime: '05.08 08:45',
           blogTitle: '文章标题',
-          blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          blogContent: '限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
           relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240',
           pageView: 1000,
           reply: 10000,
@@ -70,8 +70,8 @@ export default {
           userName: '用户名',
           publishTime: '05.08 08:45',
           blogTitle: '文章标题',
-          blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
-          relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240',
+          blogContent: '限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          relatedImg: '',
           pageView: 1000,
           reply: 10000,
           like: 10
@@ -120,23 +120,23 @@ export default {
   color: @main_color;
 }
 
-.blog-list {
+.blog-content-info .blog-list {
   position: relative;
 }
-.blog-list .author {
+.blog-content-info .blog-list .author {
   margin-bottom: 14px;
 }
-.blog-list .author .avatar {
+.blog-content-info .blog-list .author .avatar {
   margin-right: 5px;
 }
-.blog-list .meta {
+.blog-content-info .blog-list .meta {
   color: #b4b4b4;
 }
-.blog-list .meta a {
+.blog-content-info .blog-list .meta a {
   margin-right: 10px;
   color: #b4b4b4;
 }
-.blog-list .img-blur-done {
+.blog-content-info .blog-list .img-blur-done {
   position: absolute;
   top: 50%;
   margin-top: -68px;
@@ -144,27 +144,36 @@ export default {
   width: 150px;
   height: 120px;
 }
-.blog-content {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  /*! autoprefixer: off */
-  -webkit-box-orient: vertical;
-  /* autoprefixer: on */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.6;
+.blog-content-info .blog-content {
+  position:relative;
+  line-height:1.4em;
+  /* 3 times the line-height to show 3 lines */
+  height:4.2em;
+  overflow:hidden;
   margin-bottom: 8px;
 }
-.blog-list-content:first-child {
+// .blog-content:after {
+//   content: "...";
+//   font-weight: 800;
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
+// }
+.blog-content-info .blog-list-content:first-child {
   border-top: 1px solid #F0F0F0;
 }
-.blog-list-content {
+.blog-content-info .blog-list-content.hasImg {
   padding-right: 160px;
+}
+.blog-content-info .blog-list-content.noImg {
+  padding-right: 0;
+}
+.blog-content-info .blog-list-content {
   min-height: 140px;
   padding-top: 17px;
   padding-bottom: 17px;
 }
-.blog-list .blog-title {
+.blog-content-info .blog-list .blog-title {
   color: #333;
   display: inherit;
   text-align: left;
@@ -172,10 +181,10 @@ export default {
   font-size: 18px;
   font-weight: 700;
 }
-.blog-list .publish-time{
+.blog-content-info .blog-list .publish-time{
   color: #969696;
 }
-.blog-list p {
+.blog-content-info .blog-list p {
   text-align: left;
 }
 </style>

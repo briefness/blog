@@ -1,7 +1,7 @@
 <template>
   <div class="published-blog-list">
     <div class="blog-list" v-for="(blog, index) in blogList" :key="index">
-      <div class="blog-list-content">
+      <div class="blog-list-content" :class="{ hasImg: blog.relatedImg , noImg: !blog.relatedImg }">
         <router-link to="/blogDetail" class="blog-title">{{blog.publishTime}}</router-link>
         <p class="blog-content">
           {{blog.blogContent}}
@@ -27,8 +27,16 @@ export default {
       blogList: [
         {
           publishTime: '2018.05.08 08:45',
-          blogContent: '这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          blogContent: '限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
           relatedImg: 'http://upload-images.jianshu.io/upload_images/4810847-84c483151ca77460.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240',
+          pageView: 1000,
+          reply: 10000,
+          like: 10
+        },
+        {
+          publishTime: '2018.05.08 08:45',
+          blogContent: '限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示这里是文章的内容，限制显示字数，超出部分显示...',
+          relatedImg: '',
           pageView: 1000,
           reply: 10000,
           like: 10
@@ -68,21 +76,22 @@ export default {
   height: 120px;
 }
 .published-blog-list .blog-list .blog-content {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  /*! autoprefixer: off */
-  -webkit-box-orient: vertical;
-  /* autoprefixer: on */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.6;
+  line-height:1.4em;
+  /* 3 times the line-height to show 3 lines */
+  height:4.2em;
+  overflow:hidden;
   margin-bottom: 8px;
 }
 .published-blog-list .blog-list .blog-list-content:first-child {
   border-bottom: 1px solid #F0F0F0;
 }
-.published-blog-list .blog-list .blog-list-content {
+.published-blog-list .blog-list-content.hasImg {
   padding-right: 160px;
+}
+.published-blog-list .blog-list-content.noImg {
+  padding-right: 0;
+}
+.published-blog-list .blog-list .blog-list-content {
   min-height: 140px;
   padding-top: 17px;
   padding-bottom: 17px;
