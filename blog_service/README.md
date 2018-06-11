@@ -1,2 +1,2 @@
-# brief
-a simple brief project
+# blog service
+a java实现的blog service
