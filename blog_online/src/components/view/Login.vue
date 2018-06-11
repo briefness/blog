@@ -14,13 +14,13 @@
       </h4>
       <div class="login-form" v-if="isActive">
         <Form ref="userInfo" :model="userInfo" :rules="ruleValidate">
-           <FormItem prop="userName">
-               <Input type="text" size="large" placeholder="手机号或邮箱" v-model="userInfo.userName">
+           <FormItem prop="username">
+               <Input type="text" size="large" placeholder="手机号或邮箱" v-model="userInfo.username">
                  <Icon type="ios-person-outline" slot="prepend"></Icon>
                </Input>
            </FormItem>
-            <FormItem prop="passwd">
-                <Input type="password" size="large" placeholder="密码" v-model="userInfo.passwd">
+            <FormItem prop="password">
+                <Input type="password" size="large" placeholder="密码" v-model="userInfo.password">
                   <Icon type="ios-locked-outline" slot="prepend"></Icon>
                 </Input>
             </FormItem>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import * as resApi from '@/service/fetchData'
 const validateMobile = (rule, value, callback) => {
   let mobileReg = /^1[3|4|5|7|8][0-9]{9}$/
   if (value === '') {
@@ -72,7 +73,7 @@ export default {
     return {
       isActive: true,
       userInfo: {
-        passwd: '',
+        password: '',
         username: ''
       },
       registerInfo: {
@@ -81,11 +82,11 @@ export default {
         nickname: ''
       },
       ruleValidate: {
-        passwd: [
+        password: [
           {required: true, message: '请填写密码', trigger: 'blur'},
           {type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur'}
         ],
-        userName: [
+        username: [
           { required: true, message: '请填写手机号或邮箱', trigger: 'blur' }
         ]
       },
@@ -111,8 +112,15 @@ export default {
   methods: {
     // login
     handleLoginSubmit () {
-      window.sessionStorage.setItem('token', 'tokens')
-      this.$router.push('/blogList')
+      this.$refs[name].validate(async (valid) => {
+        if (valid) {
+          let res = await resApi.accountLogin(this.userInfo.username, this.userInfo.password)
+          if (res) {
+            window.sessionStorage.setItem('token', 'tokens')
+            this.$router.push('/blogList')
+          }
+        }
+      })
     },
     // register
     handleRegisterSubmit () {

@@ -56,8 +56,7 @@ export default {
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': window.sessionStorage.getItem('token'),
-        'storeToken': window.sessionStorage.getItem('storeToken')
+        'Access-Control-Allow-Origin': '*'
       }
     }).then(
       (response) => {
@@ -77,9 +76,7 @@ export default {
       params, // get 请求时带的参数
       timeout: 10000,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': window.sessionStorage.getItem('token'),
-        'storeToken': window.sessionStorage.getItem('storeToken')
+        'Content-Type': 'application/json; charset=UTF-8'
       }
     }).then(
       (response) => {
@@ -99,9 +96,7 @@ export default {
       params,
       timeout: 10000,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': window.sessionStorage.getItem('token'),
-        'storeToken': window.sessionStorage.getItem('storeToken')
+        'Content-Type': 'application/json; charset=UTF-8'
       }
     }).then(
       (response) => {
@@ -121,9 +116,7 @@ export default {
       data: JSON.stringify(data),
       timeout: 10000,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': window.sessionStorage.getItem('token'),
-        'storeToken': window.sessionStorage.getItem('storeToken')
+        'Content-Type': 'application/json; charset=UTF-8'
       }
     }).then(
       (response) => {
