@@ -1,5 +1,7 @@
 # blog
  a simple vue + java project
+ 
+ 技术栈：vue + vuex + axios + less + iview + springboot + spring data jpa
 > mory
 
  # blog文件目录
