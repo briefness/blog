@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     // login
-    handleLoginSubmit () {
+    handleLoginSubmit (name) {
       this.$refs[name].validate(async (valid) => {
         if (valid) {
           let res = await resApi.accountLogin(this.userInfo.username, this.userInfo.password)
