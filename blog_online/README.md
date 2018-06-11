@@ -1,5 +1,8 @@
 # blog online
 使用 VUE 模仿 简书
+
+技术栈：vue + vuex + axios + less + iview
+
 > mory
 
 ## Build Setup
