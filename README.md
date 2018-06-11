@@ -1,10 +1,13 @@
 # blog
+
  a simple vue + java project
  
- 技术栈：vue + vuex + axios + less + iview + springboot + spring data jpa
+ 技术栈：vue + vuex + axios + less + iview + springboot + spring data jpa + mysql
+ 
 > mory
 
  # blog文件目录
+ 
   blog_online blog的前端文件
   
   blog_service blog的后端服务文件
